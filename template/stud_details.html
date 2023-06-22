@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elearn project">
+  <title>Register</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'styles\bootstrap4\bootstrap.min.css' %}">
+  <link href="{% static 'plugins\font-awesome-4.7.0\css\font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins\OwlCarousel2-2.2.1\owl.carousel.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins\OwlCarousel2-2.2.1\owl.theme.default.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins\OwlCarousel2-2.2.1\animate.css' %}">
+  <link href="{% static 'plugins\video-js\video-js.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles\main_styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles\responsive.css'%}">
+
+</head>
+
+<body>
+  <div class="super_container" style="background-color: white;">
+    <header class="header">
+
+
+
+      <!-- Header Content -->
+      <div class="header_container">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                <div class="logo_container">
+                  <a href="#">
+                    <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                      <h3 class="logo_img" id="logo"><img src="{%static 'images\logo.jpg' %}" alt=""></h3>
+
+                    </div>
+                  </a>
+                </div>
+                <nav class="main_nav_contaner ml-auto">
+                  <ul class="main_nav">
+                    <li><a href="{% url 'home' %}">home</a></li>
+                    <li><a href="{% url 'about' %}">About us</a></li>
+                    <li><a href="#">courses</a></li>
+                    {% if request.user.is_staff %}
+										<li class="active"><a href="{% url 'create_room' %}">Create Room</a></li>
+										{% else %}
+										<li class="active"><a href="{% url 'join_room' %}">Join Room</a></li>
+										{% endif %}
+                    {% if user.is_authenticated %}
+										<li><a href="{% url 'logout' %}">Logout</a></li>
+										{% else %}
+										<li class="active"><a href="{% url 'login' %}">Login/Register</a></li>
+                    {% endif %}
+                  </ul>
+
+
+                  <!-- Hamburger -->
+
+                  <div class="hamburger menu_mm">
+                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                  </div>
+                </nav>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Search Panel -->
+
+    </header>
+
+    <!-- Menu -->
+
+    <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+      <div class="menu_close_container">
+        <div class="menu_close">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <nav class="menu_nav">
+        <ul class="menu_mm">
+          <li class="menu_mm"><a href="{% url 'home' %}">Home</a></li>
+          <li class="menu_mm"><a href="{% url 'about' %}">About</a></li>
+          {% if request.user.is_staff %}
+					<li class="menu_mm"><a href="{% url 'create_room' %}">Create Room</a></li>
+					{% else %}
+					<li class="menu_mm"><a href="{% url 'join_room' %}">Join Room</a></li>
+					{% endif %}
+          <li class="menu_mm"><a href="#">Courses</a></li>
+          {% if user.is_authenticated %}
+					<li class="menu_mm"><a href="{% url 'logout' %}">logout</a></li>
+					{% else %}
+					<li class="menu_mm"><a href="{% url 'logout' %}">Login/Register</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="menu_extra">
+        <div class="menu_phone"><span class="menu_title">phone:</span>9999999999</div>
+        <div class="menu_social">
+          <span class="menu_title">follow us</span>
+          <ul>
+            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="row jumbotron box8" style="background-color:white !important">
+          <div class="col-sm-12 mt-5 mb-4">
+            <h2 class="text-center" style="color: #845695;">Student Details</h2>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="name-f">First Name</label>
+            <input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter your first name."
+              required style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="name-l">Last name</label>
+            <input type="text" class="form-control" name="lname" id="name-l" placeholder="Enter your last name."
+              required style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email." required
+              style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="address-1">Address Line-1</label>
+            <input type="address" class="form-control" name="Locality" id="address-1"
+              placeholder="Locality/House/Street no./City/Village" required style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="class">CLASS</label>
+            <select class="form-control custom-select browser-default" name="standard"
+              style="border:1px solid #845695;">
+              <option value="None">None</option>
+              <option value="I">I</option>
+              <option value="II">II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+              <option value="V">V</option>
+              <option value="VI">VI</option>
+              <option value="VII">VII</option>
+              <option value="VIII">VIII</option>
+              <option value="IX">IX</option>
+              <option value="X">X</option>
+              <option value="XI">XI</option>
+              <option value="XII">XII</option>
+            </select>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="State">State</label>
+            <input type="address" class="form-control" name="State" id="State" placeholder="Enter your state name."
+              required style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-2 form-group">
+            <label for="zip">Postal-Code</label>
+            <input type="zip" class="form-control" name="Zip" id="zip" placeholder="Postal-Code." required
+              style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="Country">Country</label>
+            <select id="Country" class="form-control browser-default custom-select" name="Country"
+              style="border:1px solid #845695;">
+              <option value="INDIA">INDIA</option>
+            </select>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="Date">Date Of Birth</label>
+            <input type="Date" name="dob" class="form-control" id="Date" placeholder="" required
+              style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="sex">Gender</label>
+            <select id="sex" class="form-control browser-default custom-select" name="gender"
+              style="border:1px solid #845695;">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="unspesified">Unspecified</option>
+            </select>
+          </div>
+          <div class="col-sm-2 form-group">
+            <label for="cod">Country code</label>
+            <input type="tel" name="cod" class="form-control" value="+91" id="tel"
+              placeholder="Enter Your Contact Number." disabled readonly style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="tel">Phone</label>
+            <input type="tel" name="phone" class="form-control" id="tel" placeholder="Enter Your Contact Number."
+              required style="border:1px solid #845695;">
+          </div>
+          <div class="col-sm-12 form-group mb-0">
+            <button class="btn float-right" style="background-color: #845695; color:white;">Submit</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="{% static 'js\jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles\bootstrap4\popper.js' %}"></script>
+<script src="{% static 'styles\bootstrap4\bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins\greensock\TweenMax.min.js' %}"></script>
+<script src="{% static 'plugins\greensock\TimelineMax.min.js' %}"></script>
+<script src="{% static 'plugins\scrollmagic\ScrollMagic.min.js' %}"></script>
+<script src="{% static 'plugins\greensock\animation.gsap.min.js' %}"></script>
+<script src="{% static 'plugins\greensock\ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'plugins\OwlCarousel2-2.2.1\owl.carousel.js' %}"></script>
+<script src="{% static 'plugins\easing\easing.js' %}"></script>
+<script src="{% static 'plugins\video-js\video.min.js' %}"></script>
+<script src="{% static 'plugins\video-js\Youtube.min.js' %}"></script>
+<script src="{% static 'plugins\parallax-js-master\parallax.min.js' %}"></script>
+<script src="{% static 'js\custom.js' %}"></script>
+
+</html>
